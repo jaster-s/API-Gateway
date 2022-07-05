@@ -1,0 +1,37 @@
+version: '3.5'
+services:
+  api:
+    build: .
+    image: fli-gateway-api
+    container_name: fli-api
+    restart: always
+    env_file:
+      - .env
+    expose:
+      - ${APP_PORT}
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    volumes:
+      - ./logs:/usr/src/app/logs
+    networks:
+      - fli_default
+  db:
+    image: mongo:4.4
+    container_name: fli-db
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: root-db
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/database:/data/db
+    networks:
+      - fli_default
+networks:
+    fli_default:
+        name: fli-default
