@@ -12,7 +12,7 @@
 1. Clone this repository
 2. Go to repository directory
 3. Config environment
-    1. Rename .env.example to .env using the command `cp .env.example .env`
+    1. Rename example.txtto .env using the command `cp example.txt .env`
     2. Enter application port (APP_PORT)
     3. Config MongoDB on variable with prefix MONGO_
     4. Config SMTP Gmail
